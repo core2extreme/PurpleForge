@@ -266,5 +266,9 @@ If you're new to Windows 11 installation or want to follow along visually, this 
 ### 7.1 Install Kali Linux
 ### 7.2 Configure Hostname and Network
 ### 7.3 Update and Install Tools
-```
+
+## 8. Credits and External Resources
+
+- [Windows Server 2025 Installation Video](https://youtu.be/fbfSKgV2in8?si=7LoS7RCeenfELb87) by TechFixFL
+- [Windows 11 Installation Guide](https://youtu.be/EMuw_IN-UOU?si=4v9BcCVfuMc7S7Uo) by TechRug
 
