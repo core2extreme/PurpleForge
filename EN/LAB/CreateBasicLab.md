@@ -1,6 +1,6 @@
 # Create a Basic Active Directory Lab
 
-This guide walks you through creating a minimal lab environment for Windows domain attack and defense simulations. It includes one domain controller, one Windows 11 workstation, and one Kali Linux machine — all within the same subnet.
+This guide walks you through creating a minimal lab environment for Windows domain attack and defense simulations. It includes one domain controller, two Windows 11 workstation, and one Kali Linux machine — all within the same subnet.
 
 
 ## 1. Lab Overview
@@ -111,7 +111,8 @@ Assign the following IPs manually inside each operating system:
 |--------------|------------------|----------------------------|
 | DC01         | 192.168.56.10    | Domain Controller          |
 | WIN11-CL01   | 192.168.56.11    | Windows workstation        |
-| KALI01       | 192.168.56.12    | Kali attacker (Responder)  |
+| WIN11-CL02   | 192.168.56.12    | Windows workstation        |
+| KALI01       | 192.168.56.15    | Kali attacker (Responder)  |
 
 > Tip: After configuration, test connectivity with `ping` between all systems before proceeding.
 
@@ -171,13 +172,13 @@ Open PowerShell as Administrator and run:
 ```powershell
 Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
 ```
-### 5.4 Promote to Domain Controller (`homelab.local`)
+### 5.4 Promote to Domain Controller (`discordia.local`)
 Open PowerShell as Administrator and run the following command to create a new forest:
 
 ```powershell
 Install-ADDSForest `
-    -DomainName "homelab.local" `
-    -DomainNetbiosName "HOMELAB" `
+    -DomainName "discordia.local" `
+    -DomainNetbiosName "DISCORDIA" `
     -SafeModeAdministratorPassword (Read-Host -AsSecureString "Enter DSRM password") `
     -InstallDNS `
     -Force
@@ -193,8 +194,19 @@ Install-ADDSForest `
 - Force: Skips confirmation prompts
 
 ### 5.5 Create User Accounts for Testing
+This step sets up the test user accounts you’ll need in your lab. One account will be a **non-privileged domain user**, and the other will be a **local admin account** for initial setup on the Windows 11 workstation.
 
----
+#### Step 1: Create a Domain User (No Admin Rights)
+
+On `DC01`, open PowerShell as Administrator:
+```powershell
+New-ADUser -Name "jchambers" `
+    -SamAccountName "jchambers" `
+    -UserPrincipalName "jchambers@discordia.local" `
+    -AccountPassword (Read-Host -AsSecureString "Set password for jchambers") `
+    -Enabled $true
+```
+
 
 ## 6. Windows 11 Client Setup (WIN11-CL01)
 
