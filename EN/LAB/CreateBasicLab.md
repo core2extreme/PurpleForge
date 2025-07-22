@@ -186,11 +186,11 @@ Install-ADDSForest `
 
 ##### Description
 
--DomainName: The fully qualified domain name (FQDN)
--DomainNetbiosName: NetBIOS name shown in legacy tools (uppercase preferred)
--InstallDNS: Installs and configures DNS on this DC
--SafeModeAdministratorPassword: Required for Directory Services Restore Mode (DSRM)
--Force: Skips confirmation prompts
+- DomainName: The fully qualified domain name (FQDN)
+- DomainNetbiosName: NetBIOS name shown in legacy tools (uppercase preferred)
+- InstallDNS: Installs and configures DNS on this DC
+- SafeModeAdministratorPassword: Required for Directory Services Restore Mode (DSRM)
+- Force: Skips confirmation prompts
 
 ### 5.5 Create User Accounts for Testing
 
