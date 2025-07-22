@@ -144,8 +144,28 @@ If you're unfamiliar with installing Windows Server, follow this video tutorial:
 
 This video covers the base install process step-by-step.
 
-
 ### 5.2 Configure Hostname and Static IP
+#### Set Hostname
+Open PowerShell as Administrator and run:
+```powershell
+Rename-Computer -NewName "DC01" -Force -Restart
+```
+#### Set Static IP Address
+```powershell
+# Get Network Adapter Name
+Get-NetAdapter
+
+# Set static IP on Interface "Ethernet"
+New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.56.10 -PrefixLength 24 -DefaultGateway 192.168.56.1
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 127.0.0.1
+```
+##### Description
+This assigns:
+- IP: 192.168.56.10
+- Subnet: 255.255.255.0 (/24)
+- Gateway: 192.168.56.1 (can be a dummy if no internet is needed)
+- DNS Server: localhost (127.0.0.1) — required before promoting to a DC
+
 ### 5.3 Install AD DS Role
 ### 5.4 Promote to Domain Controller (`discordia.local`)
 ### 5.5 Create User Accounts for Testing
