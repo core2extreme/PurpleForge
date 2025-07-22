@@ -221,10 +221,40 @@ New-ADUser -Name "jchambers" `
     -Enabled $true
 ```
 
-
 ## 6. Windows 11 Client Setup (WIN11-CL01)
-
 ### 6.1 Install Windows 11
+
+In this step, you'll install Windows 11 Pro on the virtual machine `WIN11-CL01` and `WIN11-CL02`. 
+This machines will later be joined to the `discordia.local` domain and used to simulate user behavior or attack targets.
+
+#### Installation Overview
+
+1. Create a new virtual machine in **VMware Workstation**
+2. Attach the **Windows 11 ISO** (see [Resources](#2-resources)) as the boot disk
+3. Boot the VM and start the installer
+4. Choose:
+   - **Edition:** Windows 11 Pro
+   - **Custom install** (not upgrade)
+   - Create a new partition on the virtual disk
+5. Follow the OOBE prompts:
+   - Region, keyboard layout, etc.
+   - Skip or disable Microsoft account login (choose "Offline Account")
+   - Name the device: `WIN11-CL01`
+   - Set a temporary local admin account (e.g., `localadmin`)
+
+6. Once the setup is complete:
+   - Log in with the local admin account
+   - Install VMware Tools for proper drivers and integration
+
+> Tip: Do not join the domain yet — this will be handled in the next steps.
+
+
+#### Video Guide (Optional)
+
+If you're new to Windows 11 installation or want to follow along visually, this guide walks through the full process:
+
+[Windows 11 Pro Installation Guide (YouTube)](https://youtu.be/EMuw_IN-UOU?si=4v9BcCVfuMc7S7Uo)
+
 ### 6.2 Configure Network and Hostname
 ### 6.3 Join the Domain (`discordia.local`)
 ### 6.4 Log In with Test User
