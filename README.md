@@ -2,13 +2,7 @@
 
 A long-term Purple Teaming repository where I routinely publish new Red, Blue, and Purple team guides, demos, and best practices. Serves as a central knowledge hub and reference I link to in my LinkedIn posts.
 
-## ⚠️ Disclaimer & Rechtliche Hinweise
-
-> **Deutsch**  
-> Diese Anleitungen und Demonstrationen dienen ausschließlich zu **pädagogischen Zwecken** und für autorisierte Sicherheitstests im eigenen Netzwerk.  
-> Der Einsatz von Offensive-Security-Tools **muss zwingend im Vorfeld** mit Ihrer vorgesetzten Stelle abgestimmt werden.  
-> Jegliche unautorisierte oder **böswillige** Anwendung dieser Methoden ist verboten und kann strafrechtlich verfolgt werden.  
-> **Haftungsausschluss:** Für jegliche **wirtschaftlichen Schäden**, die durch unsachgemäße, unautorisierte oder böswillige Nutzung dieser Inhalte entstehen, übernehme ich keine Verantwortung.
+## ⚠️ Disclaimer & Legal
 
 > **English**  
 > These guides and demonstrations are provided **for educational purposes only** and for authorized security testing within your own network.  
@@ -24,11 +18,7 @@ A long-term Purple Teaming repository where I routinely publish new Red, Blue, a
 
 ---
 
-## 🎯 Ziel / Goal
-
-> **Deutsch**  
-> Dieses Repository dient als langfristige Plattform für **Purple Teaming**:  
-> Ich werde hier immer wieder verschiedene **Red-, Blue- und Purple-Teaming-Inhalte** veröffentlichen und – insbesondere über LinkedIn-Posts – darauf verweisen.
+## 🎯  / Goal
 
 > **English**  
 > This repository serves as a long-term platform for **Purple Teaming**:  
