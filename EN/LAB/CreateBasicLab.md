@@ -11,7 +11,7 @@ This guide walks you through creating a minimal lab environment for Windows doma
 - Serve as foundation for blue and red team exercises
 
 ### 1.2 Lab Topology
-Coming Soon
+![Lab Topology](./screenshots/basic_topology.png)
 
 ## 2. Resources
 
