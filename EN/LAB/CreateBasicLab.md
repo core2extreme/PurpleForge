@@ -16,19 +16,29 @@ Coming Soon
 ## 2. Resources
 
 ### Operating System ISOs
-- Windows Server 2025: https://www.microsoft.com/en-us/evalcenter/download-windows-server
-- Windows 11 Pro: https://www.microsoft.com/software-download/windows11
-- Kali Linux: https://www.kali.org/get-kali/
+
+| Name                | Link                                                                 |
+|---------------------|----------------------------------------------------------------------|
+| Windows Server 2025 | https://www.microsoft.com/en-us/evalcenter/download-windows-server  |
+| Windows 11 Pro      | https://www.microsoft.com/software-download/windows11               |
+| Kali Linux          | https://www.kali.org/get-kali/                                       |
 
 ### Microsoft Tools
-- Sysinternals Suite: https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite
-- RSAT Tools: https://learn.microsoft.com/en-us/windows-server/remote/remote-server-administration-tools
+
+| Name              | Link                                                                                  |
+|-------------------|----------------------------------------------------------------------------------------|
+| Sysinternals Suite | https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite          |
+| RSAT Tools         | https://learn.microsoft.com/en-us/windows-server/remote/remote-server-administration-tools |
 
 ### Security Tools
-- Responder: https://github.com/lgandx/Responder
-- Wireshark: https://www.wireshark.org/
-- Hashcat: https://hashcat.net/hashcat/
-- Mimikatz: https://github.com/gentilkiwi/mimikatz
+
+| Name      | Link                                                      |
+|-----------|-----------------------------------------------------------|
+| Responder | https://github.com/lgandx/Responder                       |
+| Wireshark | https://www.wireshark.org/                                |
+| Hashcat   | https://hashcat.net/hashcat/                              |
+| Mimikatz  | https://github.com/gentilkiwi/mimikatz                    |
+
 
 ## 3. Virtual Machine Setup
 
