@@ -28,7 +28,9 @@ Coming Soon
 | Name              | Link                                                                                  |
 |-------------------|----------------------------------------------------------------------------------------|
 | Sysinternals Suite | https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite          |
-| RSAT Tools         | https://learn.microsoft.com/en-us/windows-server/remote/remote-server-administration-tools |
+| RSAT Tools*         | https://learn.microsoft.com/en-us/windows-server/remote/remote-server-administration-tools |
+
+\* RSAT Tools are optional as we config the DC locally
 
 ### Security Tools
 
@@ -56,8 +58,62 @@ Coming Soon
 
 ## 4. Network Configuration
 
-- All machines should be placed in the same internal, NAT, or host-only network.
-- Use static IPs or reserved DHCP leases to ensure consistency.
+### 4.1 Network Options in VMware Workstation
+
+VMware offers several types of virtual networks. Choosing the right one is critical to how your lab behaves — especially for isolation, visibility, and control.
+
+| Network Type    | Description                                                                 | Internet Access | Use Case                     |
+|------------------|-----------------------------------------------------------------------------|------------------|-------------------------------|
+| [**NAT**](https://docs.vmware.com/en/VMware-Workstation-Pro/17.0/com.vmware.ws.using.doc/GUID-9D66C22F-4B79-4CE1-866E-9BA62F68E1F2.html) | VMs share the host's IP and access the internet through a network address translation (NAT) layer. | Yes | For general use with updates |
+| **Bridged**      | VMs appear as full devices on the same network as the host.                 | Yes              | For integration with LAN      |
+| **Host-Only**    | VMs can communicate with each other and the host, but **not the internet**. | No               | Ideal for isolated test labs  |
+| **Custom (VMnetX)** | Manually created host-only or isolated networks                         | Depends          | Used for multiple lab setups  |
+
+
+### 4.2 Why We Use Host-Only for This Lab
+
+For this lab, we intentionally isolate all virtual machines from the internet and external networks by using a **host-only** network. This provides:
+
+- **Isolation:** No internet access = no interference, telemetry, or external exposure
+- **Control:** You fully control routing, DNS, and firewall rules
+- **Stability:** No updates or background processes affecting traffic or timing
+- **Safety:** You can run attack tools without leaking anything onto a real network
+
+This setup is perfect for demonstrating credential theft (like LLMNR poisoning), malware simulation, or attack chains — without the risk of impacting production systems.
+
+### 4.3 Create a Host-Only Network in VMware
+
+1. Open **VMware Workstation**
+2. Go to **Edit > Virtual Network Editor**
+3. Click **"Add Network..."**, select an unused VMnet (e.g., `VMnet2`)
+4. Configure it as:
+   - **Host-only**
+   - **Disable DHCP**
+   - **Set subnet manually**, e.g.:
+     - Subnet IP: `192.168.56.0`
+     - Subnet Mask: `255.255.255.0`
+
+> This creates a closed, offline virtual network for your lab only.
+
+
+### 4.4 Assign the Network to All VMs
+
+- Open settings for each VM: `DC01`, `WIN11-CL01`, and `KALI01`
+- Set **Network Adapter** to **"Custom" > VMnet2** (or your selected VMnet)
+- Ensure **all three VMs** use the same custom host-only network
+
+
+### 4.5 Assign Static IP Addresses
+
+Assign the following IPs manually inside each operating system:
+
+| Hostname     | IP Address       | Notes                      |
+|--------------|------------------|----------------------------|
+| DC01         | 192.168.56.10    | Domain Controller          |
+| WIN11-CL01   | 192.168.56.11    | Windows workstation        |
+| KALI01       | 192.168.56.12    | Kali attacker (Responder)  |
+
+> Tip: After configuration, test connectivity with `ping` between all systems before proceeding.
 
 
 ## 5. Windows Server 2025 Setup (DC01)
