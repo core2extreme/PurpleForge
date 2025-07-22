@@ -15,6 +15,22 @@ Key characteristics of LLMNR:
 While LLMNR can provide fallback name resolution in poorly configured environments, its lack of security controls makes it vulnerable to spoofing and poisoning attacks. Because of this, it is considered a legacy feature and is recommended to be disabled in enterprise environments.
 
 ### 1.2 What is LLMNR Poisoning?
+
+LLMNR poisoning, also referred to as **LLMNR spoofing** or a **Responder attack**, is a technique used by attackers to intercept and manipulate local name resolution traffic on a network. It exploits the design of the LLMNR (Link-Local Multicast Name Resolution) protocol, which lacks authentication and allows any host on the local subnet to respond to name resolution requests.
+
+When a Windows system attempts to resolve a hostname that fails via DNS, it falls back to LLMNR. An attacker on the same broadcast domain can listen for these LLMNR queries and respond with a spoofed reply, claiming to be the requested host. This leads the victim machine to attempt authentication with the attacker, typically over SMB, and in doing so, leak **NTLMv2 authentication hashes**.
+
+These captured hashes can then be:
+- Cracked offline using password recovery tools such as `hashcat`
+- Relayed to other services in real time if SMB signing is not enforced
+- Stored and analyzed for lateral movement or privilege escalation
+
+The most commonly used tool for this type of attack is **Responder**, which automates spoofing of LLMNR, NBNS, and other legacy protocols to capture credentials.
+
+LLMNR poisoning is highly effective in flat networks and environments where legacy protocols are still enabled by default. It is widely seen in internal penetration tests, red team engagements, and real-world post-compromise scenarios.
+
+This technique is classified under [MITRE ATT&CK T1557.001](https://attack.mitre.org/techniques/T1557/001/): *Adversary-in-the-Middle: LLMNR/NBT-NS Poisoning and SMB Relay*.
+
 ### 1.3 Why Is It a Threat?
 ### 1.4 Attack Context (Insider Threat, Lateral Movement, etc.)
 
