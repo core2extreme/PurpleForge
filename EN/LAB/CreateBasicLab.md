@@ -119,6 +119,32 @@ Assign the following IPs manually inside each operating system:
 ## 5. Windows Server 2025 Setup (DC01)
 
 ### 5.1 Install Windows Server
+## 5.1 Install Windows Server 2025
+
+Start by installing Windows Server 2025 on the virtual machine labeled `DC01`. This machine will serve as your domain controller.
+
+### Installation Steps (Summary)
+
+1. Create a new VM in VMware Workstation
+2. Mount the Windows Server 2025 ISO (see [Resources](#2-resources))
+3. Boot the VM and follow the on-screen setup
+4. Choose:
+   - Edition: **Standard Edition (Desktop Experience)** or equivalent
+   - Language and region settings as preferred
+5. Create a local Administrator password (secure but memorable)
+6. Once installed, install VMware Tools and reboot
+
+> Ensure you assign the machine a static IP before promoting it to a domain controller in later steps.
+
+### Need Visual Help?
+
+If you're unfamiliar with installing Windows Server, follow this video tutorial:
+
+[Basic Windows Server 2025 Installation Guide (YouTube)](https://youtu.be/fbfSKgV2in8?si=7LoS7RCeenfELb87)
+
+This video covers the base install process step-by-step.
+
+
 ### 5.2 Configure Hostname and Static IP
 ### 5.3 Install AD DS Role
 ### 5.4 Promote to Domain Controller (`discordia.local`)
