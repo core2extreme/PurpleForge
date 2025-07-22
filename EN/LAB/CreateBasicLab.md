@@ -167,7 +167,31 @@ This assigns:
 - DNS Server: localhost (127.0.0.1) — required before promoting to a DC
 
 ### 5.3 Install AD DS Role
-### 5.4 Promote to Domain Controller (`discordia.local`)
+Open PowerShell as Administrator and run:
+```powershell
+Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
+```
+### 5.4 Promote to Domain Controller (`homelab.local`)
+Open PowerShell as Administrator and run the following command to create a new forest:
+
+```powershell
+Install-ADDSForest `
+    -DomainName "homelab.local" `
+    -DomainNetbiosName "HOMELAB" `
+    -SafeModeAdministratorPassword (Read-Host -AsSecureString "Enter DSRM password") `
+    -InstallDNS `
+    -Force
+```
+> __Note:__ After completion the Server will restart.
+
+##### Description
+
+-DomainName: The fully qualified domain name (FQDN)
+-DomainNetbiosName: NetBIOS name shown in legacy tools (uppercase preferred)
+-InstallDNS: Installs and configures DNS on this DC
+-SafeModeAdministratorPassword: Required for Directory Services Restore Mode (DSRM)
+-Force: Skips confirmation prompts
+
 ### 5.5 Create User Accounts for Testing
 
 ---
