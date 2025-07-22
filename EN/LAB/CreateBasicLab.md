@@ -196,7 +196,21 @@ Install-ADDSForest `
 ### 5.5 Create User Accounts for Testing
 This step sets up the test user accounts you’ll need in your lab. One account will be a **non-privileged domain user**, and the other will be a **local admin account** for initial setup on the Windows 11 workstation.
 
-#### Step 1: Create a Domain User (No Admin Rights)
+#### Step 1: Create a Domain Admin Account (`r.deschain`)
+On `DC01`, open PowerShell as Administrator:
+```powershell
+# Create User
+New-ADUser -Name "Roland Deschain" `
+    -SamAccountName "r.deschain" `
+    -UserPrincipalName "r.deschain@discordia.local" `
+    -AccountPassword (Read-Host -AsSecureString "Set password for r.deschain") `
+    -Enabled $true
+
+# Adding to "Domain Admins" Group
+Add-ADGroupMember -Identity "Domain Admins" -Members "r.deschain"
+```
+
+#### Step 2: Create a Domain User (`jchambers`)
 
 On `DC01`, open PowerShell as Administrator:
 ```powershell
