@@ -269,6 +269,6 @@ If you're new to Windows 11 installation or want to follow along visually, this 
 
 ## 8. Credits and External Resources
 
-- [Windows Server 2025 Installation Video](https://youtu.be/fbfSKgV2in8?si=7LoS7RCeenfELb87) by TechFixFL
-- [Windows 11 Installation Guide](https://youtu.be/EMuw_IN-UOU?si=4v9BcCVfuMc7S7Uo) by TechRug
+- [Windows Server 2025 Installation Video](https://youtu.be/fbfSKgV2in8?si=7LoS7RCeenfELb87) by Danny Moran
+- [Windows 11 Installation Guide](https://youtu.be/EMuw_IN-UOU?si=4v9BcCVfuMc7S7Uo) by John Hammond
 
