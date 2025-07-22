@@ -2,6 +2,19 @@
 
 ## 1.  Introduction
 ### 1.1 What is LLMNR?
+## 1.1 What is LLMNR?
+[LLMNR (Link-Local Multicast Name Resolution)](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-llmnr/) is a protocol used by Windows operating systems to resolve hostnames to IP addresses when DNS fails. It operates over UDP port 5355 and functions similarly to DNS, but is limited to the local network segment.
+
+LLMNR is primarily designed for small networks or ad hoc environments without a fully functional DNS infrastructure. When a system issues a DNS query that receives no response, it will send a multicast LLMNR query to the local network asking if any host knows the address of the requested name.
+
+Key characteristics of LLMNR:
+
+- Operates at the link-local level (multicast to 224.0.0.252)
+- Enabled by default on Windows systems prior to Windows 11 and Windows Server 2022
+- Uses no authentication or validation of responses
+
+While LLMNR can provide fallback name resolution in poorly configured environments, its lack of security controls makes it vulnerable to spoofing and poisoning attacks. Because of this, it is considered a legacy feature and is recommended to be disabled in enterprise environments.
+
 ### 1.2 What is LLMNR Poisoning?
 ### 1.3 Why Is It a Threat?
 ### 1.4 Attack Context (Insider Threat, Lateral Movement, etc.)
