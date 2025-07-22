@@ -1,29 +1,31 @@
-# PurpleForge
+# 🛠️ PurpleForge
 
-A long-term Purple Teaming repository where I routinely publish new Red, Blue, and Purple team guides, demos, and best practices. Serves as a central knowledge hub and reference I link to in my LinkedIn posts.
+Welcome to **PurpleForge** — a long-term, hands-on Purple Teaming repository focused on Red, Blue, and Purple team knowledge sharing.
 
-## ⚠️ Disclaimer & Legal
+This repository includes attack simulations, detection engineering, and hardening techniques — all structured in a clean, repeatable lab format.
 
-> **English**  
-> These guides and demonstrations are provided **for educational purposes only** and for authorized security testing within your own network.  
-> Use of offensive-security tools **must be coordinated in advance** with your responsible supervisor or management.  
-> Any unauthorized or **malicious** use of these techniques is prohibited and may be subject to legal action.  
-> **Liability Disclaimer:** I assume **no responsibility for any financial or economic damages** resulting from improper, unauthorized, or malicious use of these materials.
+## 🌐 Language / 言語
 
-> **日本語**  
-> これらのガイドおよびデモンストレーションは、自身のネットワークで許可されたセキュリティテストおよび教育目的でのみ提供されています。  
-> オフェンシブセキュリティツールの使用は、必ず事前に上司または管理者と調整してください。  
-> 無許可または**悪意のある**使用は禁止されており、法的措置の対象となる場合があります。  
-> **免責事項:** 不適切、無許可、または悪意のある使用により生じたいかなる財務的・経済的損害についても責任を負いません。
+- [📘 English – Full README](README-en.md)
+- [📗 日本語 – README 全文はこちら](README-jp.md)
 
----
+## 🔍 Overview (EN)
 
-## 🎯  / Goal
+PurpleForge is a central hub for:
 
-> **English**  
-> This repository serves as a long-term platform for **Purple Teaming**:  
-> I will continuously publish various **Red, Blue, and Purple Team** content here and link to it in my LinkedIn posts.
+- Red team execution guides (realistic attack chains)
+- Blue team detection and KQL examples
+- Purple team integrations (how to see both sides)
+- Lab setups and technical demos
+- Linked content I reference in my LinkedIn posts
 
-> **日本語**  
-> このリポジトリは **Purple Teaming** の長期プラットフォームとして機能します。  
-> Red、Blue、Purple チームに関するさまざまなコンテンツを継続的に公開し、LinkedInの投稿でリンクしていきます。  
+## 🔍 概要（日本語）
+
+PurpleForge は以下を含む長期的なパープルチーミングリポジトリです：
+
+- Red Team の攻撃手法と実行手順
+- Blue Team の検知方法とKQLクエリ
+- 両者を統合する Purple チームの視点
+- Active Directory ラボの構築と実演
+- LinkedIn 投稿からも参照される実践リソース
+
