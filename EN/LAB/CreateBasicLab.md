@@ -1,6 +1,7 @@
 # Create a Basic Active Directory Lab
+This guide walks you through setting up a minimal Active Directory lab environment for simulating Windows domain attacks and defensive detection. It includes one domain controller, two Windows 11 workstations, and one Kali Linux machine — all placed within the same subnet.
 
-This guide walks you through creating a minimal lab environment for Windows domain attack and defense simulations. It includes one domain controller, two Windows 11 workstation, and one Kali Linux machine — all within the same subnet.
+>⚠️ Note: This is a quick and pragmatic setup guide intended for readers with basic IT and networking knowledge (e.g. IP addressing, virtualization, Windows installation). If you struggle to follow along, it's strongly recommended to solidify those fundamentals first, as they are essential for understanding the techniques demonstrated in later stages.
 
 
 ## 1. Lab Overview
