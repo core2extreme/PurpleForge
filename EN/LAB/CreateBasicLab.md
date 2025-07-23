@@ -95,6 +95,7 @@ This setup is perfect for demonstrating credential theft (like LLMNR poisoning),
 
 > This creates a closed, offline virtual network for your lab only.
 
+![Network Settings](./Screenshots/VMWare_Network_Editor.png)
 
 ### 4.4 Assign the Network to All VMs
 
