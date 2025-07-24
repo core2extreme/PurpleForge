@@ -6,8 +6,8 @@ This repository includes attack simulations, detection engineering, and hardenin
 
 ## 🌐 Language / 言語
 
-- [📘 English – Full README](README-en.md)
-- [📗 日本語 – README 全文はこちら](README-jp.md)
+- [📘 English – Full README](README-EN.md)
+- [📗 日本語 – README 全文はこちら](README-JP.md)
 
 ## 🔍 Overview (EN)
 
