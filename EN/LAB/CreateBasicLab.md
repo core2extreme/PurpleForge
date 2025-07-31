@@ -190,20 +190,35 @@ This assigns:
 Install-WindowsFeature -Name AD-Domain-Services, DHCP -IncludeManagementTools
 ```
 ##### GUI
-`Server Manager > Manage > Add Roles and Features > Next > Next > Next > Check Active Directory Domain Services > Confirm Popup with Add Features > Check DHCP Server > Confirm Popup with Add Features > Click next until Install becomes selectable > Click Install > Wait for finish`
+`Server Manager > Manage > Add Roles and Features > Next > Next > Next > Check Active Directory Domain Services > Confirm Popup with Add Features > Check DHCP Server > Confirm Popup with Add Features > Click next until Install becomes selectable > Click Install > Wait for finish`  
 
+<img width="433" height="514" alt="image" src="https://github.com/user-attachments/assets/ce8ccee6-9602-45e0-967c-22b66046b2b5" />  
+
+---
 ### 5.4 Promote to Domain Controller (`discordia.local`)
-Open PowerShell as Administrator and run the following command to create a new forest:
-
+##### Powershell
 ```powershell
 Install-ADDSForest `
-    -DomainName "discordia.local" `
+    -DomainName "discordia.lab" `
     -DomainNetbiosName "DISCORDIA" `
     -SafeModeAdministratorPassword (Read-Host -AsSecureString "Enter DSRM password") `
     -InstallDNS `
     -Force
 ```
 > __Note:__ After completion the Server will restart.
+
+##### GUI
+`Server Manager > Click the Flag (Should containt a yellow warning sign) > Select promote this server to a domain controller > Select Add a new forest > Enter domain name discordia.lab > Next > Leave Settings as is and Enter the DSRM Password > Leave DMS Delegation unchecked > Next > Leave NeetBIOS Name unchanged > Next > Leave the ADDS Database Paths unchanged > Next > Validate your Review Summary thoroughly > Next > Ignore the DNS Delegation Warning > Select Install
+
+> **Note:** We use the `.lab` suffix (e.g., `discordia.lab`) to clearly indicate that this is an internal, non-public domain for lab use. Adding a suffix prevents naming conflicts with real internet domains and ensures proper DNS separation between internal and external resources.
+
+> **Note:** The DSRM (Directory Services Restore Mode) password is **not** the same as the domain administrator's login password. It is used to log into a domain controller in **safe mode** for recovery or maintenance tasks. This account operates locally on the DC and is only needed in special scenarios like restoring Active Directory from backup. However you can use same passwords in temporary labs for convenience.
+
+<img width="928" height="585" alt="image" src="https://github.com/user-attachments/assets/0e1bdb1c-899b-4671-b1e0-97b1948d4e3d" />  
+*DC Install Summary*
+
+
+
 
 ##### Description
 
