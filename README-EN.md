@@ -4,6 +4,9 @@
 
 This repository documents techniques like credential theft, lateral movement, misconfigurations, and detection bypasses in a way that's accessible to both red and blue teams — with context from both sides.
 
+##### Index File
+[📚 Index File | Table of Contents](https://github.com/Spectralsec/PurpleForge/blob/main/EN/Index.md)
+
 ## Structure
 
 Each attack or technique is stored in its own folder and includes:
