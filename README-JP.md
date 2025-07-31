@@ -5,6 +5,9 @@
 資格情報の窃取、横移動、誤設定、検知回避などの攻撃技術を実行・検知・対策の視点から文書化しています。  
 Red/Blue 両方の観点を持つ SOC アナリスト、ペンテスター、ブルーチーム担当者に適しています。
 
+##### 日本語
+[📚 Index File | Table of Contents (日本語)](https://github.com/Spectralsec/PurpleForge/blob/main/JP/Index.md)
+
 ##  構成
 
 各攻撃手法やテクニックは、専用フォルダに保存され、以下の内容が含まれます：
