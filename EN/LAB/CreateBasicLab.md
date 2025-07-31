@@ -212,16 +212,13 @@ Server Manager > Click the flag (should contain a yellow warning sign) > Select 
 
 __The server will restart. Your former local admin is now your domain admin, so the password remains the same.__
 
-
 > **Note:** We use the `.lab` suffix (e.g., `discordia.lab`) to clearly indicate that this is an internal, non-public domain for lab use. Adding a suffix prevents naming conflicts with real internet domains and ensures proper DNS separation between internal and external resources.
 
 > **Note:** The DSRM (Directory Services Restore Mode) password is **not** the same as the domain administrator's login password. It is used to log into a domain controller in **safe mode** for recovery or maintenance tasks. This account operates locally on the DC and is only needed in special scenarios like restoring Active Directory from backup. However you can use same passwords in temporary labs for convenience.
 
 <img width="928" height="585" alt="image" src="https://github.com/user-attachments/assets/0e1bdb1c-899b-4671-b1e0-97b1948d4e3d" />  
+
 *DC Install Summary*
-
-
-
 
 ##### Description
 
@@ -230,6 +227,38 @@ __The server will restart. Your former local admin is now your domain admin, so 
 - InstallDNS: Installs and configures DNS on this DC
 - SafeModeAdministratorPassword: Required for Directory Services Restore Mode (DSRM)
 - Force: Skips confirmation prompts
+
+---
+### 5.4.1 Configure DHCP Role
+##### Powershell
+```powershell
+# Define basic variables
+$ScopeName     = "Internal"
+$ScopeID       = "192.168.56.0"
+$StartRange    = "192.168.56.100"
+$EndRange      = "192.168.56.200"
+$SubnetMask    = "255.255.255.0"
+$DNSServer     = "192.168.56.1"
+$DomainName    = "discordia.lab"
+
+# Add the scope
+Add-DhcpServerv4Scope -Name $ScopeName -StartRange $StartRange -EndRange $EndRange -SubnetMask $SubnetMask
+
+# Set DNS options
+Set-DhcpServerv4OptionValue -ScopeId $ScopeID -DnsServer $DNSServer -DnsDomain $DomainName
+
+# Activate the scope
+Set-DhcpServerv4Scope -ScopeId $ScopeID -State Active
+```
+##### GUI
+Because we're using a LAN segment (which has no built-in DHCP), we must install the DHCP role to automatically assign IP addresses and network settings to all VMs in the isolated subnet; DHCP (Dynamic Host Configuration Protocol) simplifies this by dynamically providing each machine with an IP address, subnet mask, gateway, and DNS configuration.
+
+`Server Manager > Flag > Select "Complete DHCP Configuration" > Next > Leave Credentials as is > Commit`
+`Server Manager > Tools > DHCP > Extend DC-Server Name > Right-Click IPv4 > Select New Scope > Next > Provide a Name for the IP-Range: Internal > Enter start address: 192.168.56.100 > Enter End Address: 192.168.56.200 > Next > Leave Exclusions unchanged > next > Leave Lease unchanged > next > Check I want to configure DHCP Options > Router (Leave Blank) > Next > Leave DNS Unchanged > Next > Leave WINS unchanged > Leave activate scope checked > finish.` 
+
+<img width="557" height="166" alt="image" src="https://github.com/user-attachments/assets/6e93df3d-22c4-44fc-8589-fd04eb92d270" />
+
+---
 
 ### 5.5 Create User Accounts for Testing
 This step sets up the test user accounts you’ll need in your lab. One account will be a **non-privileged domain user**, and the other will be a **local admin account** for initial setup on the Windows 11 workstation.
