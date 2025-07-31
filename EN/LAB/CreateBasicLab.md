@@ -183,12 +183,15 @@ This assigns:
 
 ---
 
-
-### 5.3 Install AD DS Role
-Open PowerShell as Administrator and run:
+### 5.3 Install AD DS & DHCP Role
+##### Powershell
 ```powershell
-Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
+# Install Active Directory Domain Services and DHCP
+Install-WindowsFeature -Name AD-Domain-Services, DHCP -IncludeManagementTools
 ```
+##### GUI
+`Server Manager > Manage > Add Roles and Features > Next > Next > Next > Check Active Directory Domain Services > Confirm Popup with Add Features > Check DHCP Server > Confirm Popup with Add Features > Click next until Install becomes selectable > Click Install > Wait for finish`
+
 ### 5.4 Promote to Domain Controller (`discordia.local`)
 Open PowerShell as Administrator and run the following command to create a new forest:
 
