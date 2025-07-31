@@ -153,12 +153,14 @@ Rename-Computer -NewName "DC01" -Force -Restart
 ```
 ##### GUI
 `Start > System > Rename this PC` 
-Enter the Name > hit "Next" > hit "Restart now" > Choose any Restart Reason > Continue
+Enter the Name > hit "Next" > hit "Restart now" > Choose any Restart Reason > Continue  
+
 <img width="801" height="455" alt="image" src="https://github.com/user-attachments/assets/3c99e323-9fde-47dd-ac38-de71ca4cdcf1" />  
 
-
 ---
+
 #### Set Static IP Address
+##### Powershell
 ```powershell
 # Get Network Adapter Name
 Get-NetAdapter
@@ -167,12 +169,20 @@ Get-NetAdapter
 New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.56.10 -PrefixLength 24 -DefaultGateway 192.168.56.1
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 127.0.0.1
 ```
-##### Description
+###### Description
 This assigns:
 - IP: 192.168.56.10
 - Subnet: 255.255.255.0 (/24)
 - Gateway: 192.168.56.1 (can be a dummy if no internet is needed)
 - DNS Server: localhost (127.0.0.1) — required before promoting to a DC
+
+##### GUI:
+`Search > View Network Connections > Select Ethernet0 with double-click > Select Properties > Select Internet Protocol Version 4 (TCP/IPv4) with double click > Change Settings as in Picture > Confirm with OK > Close opened Windows` 
+
+<img width="399" height="454" alt="image" src="https://github.com/user-attachments/assets/b6594e2d-5801-4c3c-9602-ac635f2a55e9" />  
+
+---
+
 
 ### 5.3 Install AD DS Role
 Open PowerShell as Administrator and run:
