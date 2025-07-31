@@ -208,7 +208,7 @@ Install-ADDSForest `
 > __Note:__ After completion the Server will restart.
 
 ##### GUI
-`Server Manager > Click the Flag (Should containt a yellow warning sign) > Select promote this server to a domain controller > Select Add a new forest > Enter domain name discordia.lab > Next > Leave Settings as is and Enter the DSRM Password > Leave DMS Delegation unchecked > Next > Leave NeetBIOS Name unchanged > Next > Leave the ADDS Database Paths unchanged > Next > Validate your Review Summary thoroughly > Next > Ignore the DNS Delegation Warning > Select Install
+`Server Manager > Click the Flag (Should containt a yellow warning sign) > Select promote this server to a domain controller > Select Add a new forest > Enter domain name discordia.lab > Next > Leave Settings as is and Enter the DSRM Password > Leave DMS Delegation unchecked > Next > Leave NeetBIOS Name unchanged > Next > Leave the ADDS Database Paths unchanged > Next > Validate your Review Summary thoroughly > Next > Ignore the DNS Delegation Warning > Select Install`
 
 > **Note:** We use the `.lab` suffix (e.g., `discordia.lab`) to clearly indicate that this is an internal, non-public domain for lab use. Adding a suffix prevents naming conflicts with real internet domains and ensures proper DNS separation between internal and external resources.
 
