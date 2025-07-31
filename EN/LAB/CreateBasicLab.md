@@ -147,10 +147,17 @@ This video covers the base install process step-by-step.
 
 ### 5.2 Configure Hostname and Static IP
 #### Set Hostname
-Open PowerShell as Administrator and run:
+##### Powershell
 ```powershell
 Rename-Computer -NewName "DC01" -Force -Restart
 ```
+##### GUI
+`Start > System > Rename this PC` 
+Enter the Name > hit "Next" > hit "Restart now" > Choose any Restart Reason > Continue
+<img width="801" height="455" alt="image" src="https://github.com/user-attachments/assets/3c99e323-9fde-47dd-ac38-de71ca4cdcf1" />  
+
+
+---
 #### Set Static IP Address
 ```powershell
 # Get Network Adapter Name
