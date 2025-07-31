@@ -63,40 +63,37 @@ This guide walks you through setting up a minimal Active Directory lab environme
 
 VMware offers several types of virtual networks. Choosing the right one is critical to how your lab behaves — especially for isolation, visibility, and control.
 
-| Network Type    | Description                                                                 | Internet Access | Use Case                     |
-|------------------|-----------------------------------------------------------------------------|------------------|-------------------------------|
-| [**NAT**](https://docs.vmware.com/en/VMware-Workstation-Pro/17.0/com.vmware.ws.using.doc/GUID-9D66C22F-4B79-4CE1-866E-9BA62F68E1F2.html) | VMs share the host's IP and access the internet through a network address translation (NAT) layer. | Yes | For general use with updates |
-| **Bridged**      | VMs appear as full devices on the same network as the host.                 | Yes              | For integration with LAN      |
-| **Host-Only**    | VMs can communicate with each other and the host, but **not the internet**. | No               | Ideal for isolated test labs  |
-| **Custom (VMnetX)** | Manually created host-only or isolated networks                         | Depends          | Used for multiple lab setups  |
+| Network Type         | Description                                                                                   | Internet Access | Use Case                            |
+|----------------------|-----------------------------------------------------------------------------------------------|------------------|--------------------------------------|
+| [**NAT**](https://docs.vmware.com/en/VMware-Workstation-Pro/17.0/com.vmware.ws.using.doc/GUID-9D66C22F-4B79-4CE1-866E-9BA62F68E1F2.html) | VMs share the host's IP and access the internet through a network address translation (NAT) layer. | Yes              | For general use with updates         |
+| **Bridged**          | VMs appear as full devices on the same network as the host.                                   | Yes              | For integration with LAN             |
+| **Host-Only**        | VMs can communicate with each other and the host, but **not the internet**.                   | No               | Isolated testing with host access    |
+| **Custom (VMnetX)**  | Manually created host-only or isolated networks                                               | Depends          | Used for multiple lab setups         |
+| **LAN Segment**      | VMs can communicate only with other VMs in the same segment — completely isolated from host.  | No               | Ideal for isolated internal subnets  |
 
 
-### 4.2 Why We Use Host-Only for This Lab
+### 4.2 Why We Use LAN Segments for This Lab
 
-For this lab, we intentionally isolate all virtual machines from the internet and external networks by using a **host-only** network. This provides:
+For this lab, we intentionally isolate all virtual machines from the internet, the host, and any external network by using **VMware LAN segments**. This offers:
 
-- **Isolation:** No internet access = no interference, telemetry, or external exposure
-- **Control:** You fully control routing, DNS, and firewall rules
-- **Stability:** No updates or background processes affecting traffic or timing
-- **Safety:** You can run attack tools without leaking anything onto a real network
+- **Full isolation:** No network traffic can leave the segment — perfect for red teaming or malware testing
+- **Segmented subnets:** Each LAN segment acts like its own internal switch — useful for modeling multi-subnet topologies
+- **Control:** You define routing, DHCP, and DNS manually (e.g. via a domain controller or firewall VM)
+- **Safety:** Absolutely no accidental traffic leaks to the host or outside world
 
-This setup is perfect for demonstrating credential theft (like LLMNR poisoning), malware simulation, or attack chains — without the risk of impacting production systems.
+This setup is ideal for simulating internal attack paths (e.g. lateral movement, privilege escalation) or testing intrusion detection — all within a fully contained environment.
 
-### 4.3 Create a Host-Only Network in VMware
+### 4.3 Create a LAN Segment in VMware
 
 1. Open **VMware Workstation**
-2. Go to **Edit > Virtual Network Editor**
-3. Click **"Add Network..."**, select an unused VMnet (e.g., `VMnet2`)
-4. Configure it as:
-   - **Host-only**
-   - **Disable DHCP**
-   - **Set subnet manually**, e.g.:
-     - Subnet IP: `192.168.56.0`
-     - Subnet Mask: `255.255.255.0`
+2. Go to the VM’s **Settings > Network Adapter**
+3. Select **“LAN Segment”**
+4. Click **“LAN Segments...”** and create a new segment (e.g., `INTERNAL_NET`)
+5. Repeat for each VM, assigning the same segment name
 
-> This creates a closed, offline virtual network for your lab only.
+> Unlike Host-Only or NAT networks, LAN segments do not use the Virtual Network Editor and offer true VM-to-VM isolation without host connectivity.
 
-![Network Settings](./Screenshots/VMWare_Network_Editor.png)
+<pic>
 
 ### 4.4 Assign the Network to All VMs
 
