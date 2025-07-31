@@ -82,6 +82,7 @@ For this lab, we intentionally isolate all virtual machines from the internet, t
 - **Safety:** Absolutely no accidental traffic leaks to the host or outside world
 
 This setup is ideal for simulating internal attack paths (e.g. lateral movement, privilege escalation) or testing intrusion detection — all within a fully contained environment.
+> Note: There is a way to enable Internet for this setup. This will be explained in-detail in the Guide for an advanced Lab Setup where we'll extend with Firewalls and a DMZ.
 
 ### 4.3 Create a LAN Segment in VMware
 
