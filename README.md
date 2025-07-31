@@ -19,6 +19,8 @@ PurpleForge is a central hub for:
 - Lab setups and technical demos
 - Linked content I reference in my LinkedIn posts
 
+[📚 Index File | Table of Contents](https://github.com/Spectralsec/PurpleForge/blob/main/EN/Index.md)
+
 ## 🔍 概要（日本語）
 
 PurpleForge は以下を含む長期的なパープルチーミングリポジトリです：
@@ -28,4 +30,6 @@ PurpleForge は以下を含む長期的なパープルチーミングリポジ�
 - 両者を統合する Purple チームの視点
 - Active Directory ラボの構築と実演
 - LinkedIn 投稿からも参照される実践リソース
+
+[📚 Index File | Table of Contents (日本語)](https://github.com/Spectralsec/PurpleForge/blob/main/JP/Index.md)
 
