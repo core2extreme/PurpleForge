@@ -120,7 +120,6 @@ Assign the following IPs manually inside each operating system:
 ## 5. Windows Server 2025 Setup (DC01)
 
 ### 5.1 Install Windows Server
-## 5.1 Install Windows Server 2025
 
 Start by installing Windows Server 2025 on the virtual machine labeled `DC01`. This machine will serve as your domain controller.
 
