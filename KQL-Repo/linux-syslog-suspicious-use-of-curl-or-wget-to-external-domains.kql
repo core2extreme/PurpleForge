@@ -1,0 +1,25 @@
+let AllowedDomains = dynamic([
+    "github.com", "raw.githubusercontent.com", "gitlab.com", 
+    "packages.debian.org", "archive.ubuntu.com"
+]);
+// Step 1: Find suspicious curl or wget usage
+DeviceProcessEvents
+| where OperatingSystem == "Linux"
+| where FileName in~ ("curl", "wget")
+| where ProcessCommandLine has_any ("http", "https")
+// Step 2: Extract the domain from the command line
+| extend targetDomain = extract(@"https?://([^/\s]+)", 1, ProcessCommandLine)
+| where isnotempty(targetDomain)
+// Step 3: Exclude common/allowed domains to reduce noise
+| where targetDomain !in (AllowedDomains)
+// Step 4: (Optional) Join with Threat Intelligence — 
+    | join kind=leftouter (
+   ThreatIntelligenceIndicator
+   | where Active == true
+   | where Description has_any ("APT", "Malware", "C2")  // Optional refinement
+   | project TIIndicator = Indicator, ThreatType, ConfidenceScore, ActivityGroupNames
+) on $left.targetDomain == $right.TIIndicator
+| extend TI_Hit = iff(isnotempty(ThreatType), "Yes", "No") */
+// Final output
+| project Timestamp, DeviceName, FileName, ProcessCommandLine, targetDomain
+          // , TI_Hit, ThreatType, ConfidenceScore, ActivityGroupNames // Uncomment if TI join used
