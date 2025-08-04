@@ -1,0 +1,27 @@
+// Step 1: Load allowlisted senders who are permitted to use shorteners
+let LegitShortenerSenders = (_GetWatchlist('ShortenerSafeSenders')
+    | project SafeSender = tolower(trim(" ", SearchKey)));
+// Step 2: List of known URL shorteners
+let shortener_domains = dynamic([
+    "bit.ly", "t.co", "tinyurl.com", "goo.gl", "ow.ly", "buff.ly", "rebrand.ly",
+    "is.gd", "cutt.ly", "shorte.st", "mcaf.ee", "qr.ae", "trib.al", "tiny.cc",
+    "lnkd.in", "bl.ink", "soo.gd", "snip.ly", "urlzs.com", "v.gd", "1url.com",
+    "rb.gy", "shorturl.at", "u.nu", "b.link", "adf.ly", "smarturl.it"
+]);
+// Step 3: Detect use of shorteners in emails
+let SuspiciousUrls = EmailUrlInfo
+| where UrlDomain in (shortener_domains)
+| project NetworkMessageId, Url, UrlDomain;
+// Step 4: Join with EmailEvents to enrich with sender data (all matching shorteners retained)
+SuspiciousUrls
+| join kind=rightouter (
+    EmailEvents
+    | project NetworkMessageId, Timestamp, SenderFromAddress = tolower(trim(" ", SenderFromAddress)), 
+              SenderDisplayName, Subject, RecipientEmailAddress, InternetMessageId, DeliveryAction
+) on NetworkMessageId
+// Step 5: Filter out allowlisted senders
+| lookup LegitShortenerSenders on SenderFromAddress == SafeSender
+| where isnull(SafeSender)
+// Step 6: Output
+| project Timestamp, SenderFromAddress, SenderDisplayName, Subject, RecipientEmailAddress,
+          Url, UrlDomain, InternetMessageId, DeliveryAction
