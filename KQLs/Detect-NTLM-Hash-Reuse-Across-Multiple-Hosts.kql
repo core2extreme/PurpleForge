@@ -1,0 +1,32 @@
+// Step 1: Identify NTLM logons across multiple hosts within a time range
+let TimeRange = 1h;
+let EventThreshold = 3;
+let RelayWindow = 10m;
+let NTLMRelayCandidates =
+    SecurityEvent
+    | where TimeGenerated >= ago(TimeRange)
+    | where EventID == 4624 and LogonType == 3
+    | where AuthenticationPackageName =~ "NTLM"
+    | summarize Count = count(), FirstSeen = min(TimeGenerated), LastSeen = max(TimeGenerated), Hosts = make_set(Computer, 100)
+        by TargetUserName, TargetDomainName, IpAddress
+    | where Count >= EventThreshold and array_length(Hosts) > 1;
+// Step 2: Match with network connection data from the same IPs
+let RemoteKEvt =
+    DeviceNetworkEvents
+    | where TimeGenerated >= ago(TimeRange)
+    | where RemoteIP in (NTLMRelayCandidates.IpAddress)
+    | project Timestamp = TimeGenerated, RemoteIP, DeviceName, RemotePort;
+// Step 3: Join NTLM candidates with matching network events
+NTLMRelayCandidates
+| join kind=inner (
+    RemoteKEvt
+) on $left.IpAddress == $right.RemoteIP
+| where (LastSeen - FirstSeen) < RelayWindow
+// Step 4: Enrich with process execution details
+| join kind=inner (
+    DeviceProcessEvents
+    | project TimeGenerated, DeviceName, InitiatingProcessAccountName, InitiatingProcessCommandLine, InitiatingProcessFileName, FileName, RemotePort
+) on DeviceName
+| extend DeviceHost = DeviceName
+| project Timestamp, IpAddress, Hosts, Count, DeviceHost, InitiatingProcessAccountName, InitiatingProcessCommandLine, InitiatingProcessFileName, FileName, RemotePort
+| sort by LastSeen desc
