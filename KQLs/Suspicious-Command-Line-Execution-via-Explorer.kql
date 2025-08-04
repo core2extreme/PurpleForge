@@ -1,0 +1,16 @@
+// Load user and device exclusions from Watchlists
+let ExcludedUsers = (_GetWatchlist('Exclusion-Users') | project UserName);
+let ExcludedDevices = (_GetWatchlist('Exclusion-Devices') | project DeviceName);
+DeviceProcessEvents
+// Triggered via explorer.exe, indicating user interaction ("Run"-Copy&Paste Social Engineering)
+| where InitiatingProcessFileName == "explorer.exe"
+// Suspicious command-line tools
+| where ProcessCommandLine has_any ("powershell", "pwsh", "cmd.exe", "wsl.exe")
+// Exclude known service/system accounts 
+| where not(AccountName has_any (ExcludedUsers))
+// Exclude known admin/test devices 
+| where not(DeviceName in (ExcludedDevices))
+// Normalize for consistent keyword matching
+// Output relevant fields
+| project TimeGenerated, DeviceName, AccountName, InitiatingProcessFileName, FileName, ProcessCommandLine, InitiatingProcessCommandLine
+| order by TimeGenerated desc
