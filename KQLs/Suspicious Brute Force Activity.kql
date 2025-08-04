@@ -1,0 +1,109 @@
+////////////////////////////////////////////////////////////////////
+// VARIANT_1: This version uses separate blocks for each brute-force 
+// pattern and combines them using union. It improves clarity and 
+// makes each logic path easy to understand and tune individually 
+// Especially useful for development, testing, and documentation 
+// purposes.
+//
+// Pros:
+// - Easy to read and modify per pattern
+// - Helpful for debugging and onboarding
+//
+// Cons:
+// - Less efficient (multiple scans over the same data)
+// - Slightly more complex to maintain at scale
+////////////////////////////////////////////////////////////////////
+let TimeWindow = 10m; // Time window to correlate login attempts
+let Threshold = 5;    // Minimum number of failed attempts
+// 1. One account from one IP – repeated failed attempts (targeted attack)
+let SingleAccountSingleIP = 
+SigninLogs
+| where Result == "Failure"
+| summarize AttemptCount = count(), TimeSpan = max(TimeGenerated) - min(TimeGenerated)
+    by Account, IP
+| where AttemptCount >= Threshold and TimeSpan <= TimeWindow
+| extend Pattern = "One account from one IP", AttackCategory = "Brute Force";
+// 2. One account from multiple IPs – distributed attack on a single user
+let SingleAccountMultipleIPs = 
+SigninLogs
+| where Result == "Failure"
+| summarize UniqueIPs = dcount(IP), AttemptCount = count(), TimeSpan = max(TimeGenerated) - min(TimeGenerated)
+    by Account
+| where UniqueIPs >= Threshold and TimeSpan <= TimeWindow
+| extend Pattern = "One account from multiple IPs", AttackCategory = "Brute Force";
+// 3. Multiple accounts from one IP – dictionary-style attack from a single source
+let MultipleAccountsSingleIP = 
+SigninLogs
+| where Result == "Failure"
+| summarize UniqueAccounts = dcount(Account), AttemptCount = count(), TimeSpan = max(TimeGenerated) - min(TimeGenerated)
+    by IP
+| where UniqueAccounts >= Threshold and TimeSpan <= TimeWindow
+| extend Pattern = "Multiple accounts from one IP", AttackCategory = "Brute Force";
+// 4. Multiple accounts from multiple IPs – large-scale distributed brute force
+let MultipleAccountsMultipleIPs = 
+SigninLogs
+| where Result == "Failure"
+| summarize UniqueAccounts = dcount(Account), UniqueIPs = dcount(IP), AttemptCount = count(), TimeSpan = max(TimeGenerated) - min(TimeGenerated)
+| where UniqueAccounts >= Threshold and UniqueIPs >= Threshold and TimeSpan <= TimeWindow
+| extend Pattern = "Multiple accounts from multiple IPs", AttackCategory = "Brute Force";
+// Combine results
+SingleAccountSingleIP
+| union SingleAccountMultipleIPs
+| union MultipleAccountsSingleIP
+| union MultipleAccountsMultipleIPs
+
+////////////////////////////////////////////////////////////////////
+// VARIANT_2: This version uses a single summarization with a 
+// case() function to classify all brute-force patterns in one pass. 
+// It is optimized for performance and easier to scale into 
+// dashboards or alert rules. Ideal for production use or 
+// environments with high data volume.
+//
+// Pros:
+// - Efficient (single scan over the data)
+// - Cleaner structure for dashboards and correlation logic
+//
+// Cons:
+// - Harder to debug individual logic paths
+// - Slightly less readable for less experienced analysts
+////////////////////////////////////////////////////////////////////
+// === Configuration ===
+let TimeWindow = 10m;       // Time range to analyze
+let Threshold = 5;          // Minimum number of failed attempts required
+let Lookback = 1h;          // Total lookback window for hunting (data scanning)
+// === Step 1: Filter relevant sign-in logs ===
+let FilteredSigninLogs = 
+SigninLogs
+| where Result == "Failure"
+| where TimeGenerated > ago(Lookback);
+// === Step 2: Summarize login activity by Account and IP ===
+FilteredSigninLogs
+| summarize
+    FailedAttempts = count(),
+    UniqueIPs = dcount(IP),
+    UniqueAccounts = dcount(Account),
+    FirstSeen = min(TimeGenerated),
+    LastSeen = max(TimeGenerated)
+by Account, IP
+// === Step 3: Calculate time span of activity and apply pattern classification ===
+| extend TimeSpan = LastSeen - FirstSeen
+| where TimeSpan <= TimeWindow and FailedAttempts >= Threshold
+// === Step 4: Classify behavior based on counts using case() logic ===
+| extend Pattern = case(
+    UniqueIPs == 1 and UniqueAccounts == 1, "One account from one IP",
+    UniqueIPs > 1 and UniqueAccounts == 1, "One account from multiple IPs",
+    UniqueIPs == 1 and UniqueAccounts > 1, "Multiple accounts from one IP",
+    UniqueIPs > 1 and UniqueAccounts > 1, "Multiple accounts from multiple IPs",
+    "No pattern"
+)
+// === Step 5: Filter out unmatched results and label ===
+| where Pattern != "No pattern"
+| extend AttackCategory = "Brute Force"
+
+
+
+
+
+
+
+
