@@ -1,0 +1,29 @@
+let TimeWindow = ago(1h); 
+// Define the time window for the query
+let SuspiciousCommands = dynamic([
+    "-EncodedCommand",
+    "FromBase64String",
+    "IEX ",
+    "New-Object System.Net.WebClient",
+    "Invoke-Expression",
+    "Invoke-Command",
+    "Invoke-WebRequest",
+    "DownloadString",
+    "DownloadFile"
+]); 
+// Define suspicious PowerShell command patterns
+let ExceptionsTable = datatable(Parent: string, GrandParent: string)[
+    "gc_worker.exe", "services.exe",
+]; 
+// Define exceptions as a structured table
+let Events = DeviceProcessEvents
+| where Timestamp > TimeWindow 
+| where FileName == "powershell.exe" 
+| where ProcessCommandLine has_any(SuspiciousCommands) 
+| extend Encoded = extract(@"-EncodedCommand\s+([A-Za-z0-9+/=]+)", 1, ProcessCommandLine) 
+| extend DecodedCommand = base64_decode_tostring(Encoded) 
+| extend Parent = tostring(InitiatingProcessFileName), GrandParent = tostring(InitiatingProcessParentFileName); 
+// Preprocess events: apply time window, match on PowerShell, extract/parse encoded commands, normalize process chain
+Events
+| join kind=anti (ExceptionsTable) on Parent, GrandParent 
+// Remove any events that match the exception list based on both Parent and GrandParent
