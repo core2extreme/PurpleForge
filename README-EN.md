@@ -5,7 +5,7 @@
 This repository documents techniques like credential theft, lateral movement, misconfigurations, and detection bypasses in a way that's accessible to both red and blue teams — with context from both sides.
 
 ### Index File
-[Index File | Table of Contents](https://github.com/Spectralsec/PurpleForge/blob/main/EN/Index.md)
+[Index File | Table of Contents](https://github.com/core2extreme/PurpleForge/EN/README.md)
 
 ## Structure
 
@@ -19,8 +19,8 @@ Each attack or technique is stored in its own folder and includes:
 - A `/screenshots/` subfolder for visual aids (if applicable)
 
 Central indexes:
-- [EN/Index.md](./EN/Index.md) — English Table of Contents  
-- [JP/目次.md](./JP/目次.md) — Japanese Table of Contents
+- [EN/Index.md](https://github.com/core2extreme/PurpleForge/EN/README.md) — English Table of Contents  
+- [JP/Index.md](https://github.com/core2extreme/PurpleForge/JP/README.md) — Japanese Table of Contents
 
 ## Language Support
 
