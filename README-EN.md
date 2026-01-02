@@ -30,20 +30,23 @@ This repository supports both English and Japanese:
 
 ## Topics Covered
 
-- LLMNR Poisoning  
-- NTLM Relay  
-- Pass-the-Hash  
-- Detection Engineering (KQL, Sysmon, Sigma)  
-- Hardening Techniques (GPOs, firewall, audit policy)  
-- Active Directory Lab Environments
+- End-to-end attack simulations (e.g. phishing to ransomware)
+- Credential access and lateral movement techniques
+- Blue team detection strategies (Sysmon, Sigma, KQL)
+- Threat intelligence enrichment and correlation
+- Security automation using SOAR and playbooks
+- Incident response and containment workflows
+- Integration of LLMs for decision support and tuning
+- Active Directory lab infrastructure and misconfigurations
 
 ## Goal
 
 This project aims to:
-- Provide reusable, realistic purple team examples  
-- Help defenders understand attacker behavior  
-- Demonstrate how to detect and stop attacks using built-in tools  
-- Support SOC training, threat hunting, and red/blue collaboration
+- Demonstrate practical purple teaming workflows
+- Help analysts understand attacker behavior through hands-on replication
+- Provide detection and hardening guidance tied to real scenarios
+- Serve as a reference lab for SOC operations, IR training, and tooling validation
+- Explore automation and AI-assisted decision-making in incident response
 
 ## Disclaimer & Legal
 
