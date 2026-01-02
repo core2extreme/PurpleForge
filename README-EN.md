@@ -27,7 +27,7 @@ This repository supports both English and Japanese:
 
 - End-to-end attack simulations (e.g. phishing to ransomware)
 - Credential access and lateral movement techniques
-- Blue team detection strategies (Sysmon, Sigma, KQL)
+- Blue team detection strategies (Sysmon, Sigma, EQL)
 - Threat intelligence enrichment and correlation
 - Security automation using SOAR and playbooks
 - Incident response and containment workflows
