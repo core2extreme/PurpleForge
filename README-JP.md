@@ -6,7 +6,7 @@
 Red/Blue 両方の観点を持つ SOC アナリスト、ペンテスター、ブルーチーム担当者に適しています。
 
 ##### 日本語
-[📚 Index File | Table of Contents (日本語)](https://github.com/Spectralsec/PurpleForge/blob/main/JP/Index.md)
+[📚 Index File | Table of Contents (日本語)](JP/README.md)
 
 ##  構成
 
