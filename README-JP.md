@@ -21,8 +21,8 @@ Red/Blue 両方の観点を持つ SOC アナリスト、ペンテスター、ブ
 - 補助画像は `/screenshots/` サブフォルダに配置
 
 中央インデックス：
-- [EN/Index.md](./EN/Index.md) — 英語の目次
-- [JP/目次.md](./JP/目次.md) — 日本語の目次
+- [EN/Index.md](./EN/README.md) — 英語の目次
+- [JP/目次.md](./JP/README.md) — 日本語の目次
 
 ##  言語対応
 
