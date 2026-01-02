@@ -8,15 +8,10 @@ This repository documents techniques like credential theft, lateral movement, mi
 [Index File | Table of Contents](EN/README.md)
 
 ## Structure
+This repository is organized into clearly separated sections, each covering a core aspect of Purple Teaming — from environment setup and attack simulation to automation, detection engineering, and incident response.
 
-Each attack or technique is stored in its own folder and includes:
-- A single Markdown file (`*.md`) with:
-  - Description of the technique
-  - Red team execution steps
-  - Blue team detection methods
-  - Purple team insights
-  - Hardening and mitigation guidance
-- A `/screenshots/` subfolder for visual aids (if applicable)
+All materials are documented in Markdown and include configurations, analysis steps, and visuals where applicable.
+Each section can be used independently or as part of a larger end-to-end workflow.
 
 Central indexes:
 - [EN/Index.md](EN/README.md) — English Table of Contents  
