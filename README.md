@@ -38,3 +38,17 @@ This repository includes attack simulations, detection engineering, and hardenin
 - LinkedIn 投稿からも参照される実践リソース  
 
 [Index File | Table of Contents (日本語)](JP/README.md)
+
+---
+
+## ⚠️ License & Usage Notice
+
+This project is licensed under **Creative Commons BY-NC-ND 4.0**  
+(Copyright © 2025 core2extreme)
+
+> ✅ **You are welcome to read, learn, and draw inspiration from this project.**  
+> ❌ **You are *not* permitted to fork, modify, or redistribute the content (including uploading it elsewhere), especially not for commercial purposes.**
+
+Feel free to reference this work or build your own ideas based on the concepts — just **don’t clone or republish it as-is**.
+
+📎 [Full License Text (CC BY-NC-ND 4.0)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
