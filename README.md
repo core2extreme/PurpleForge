@@ -12,6 +12,33 @@ This repository includes attack simulations, detection engineering, and hardenin
 - [日本語 – README 全文はこちら](README-JP.md)
 
 ---
+## Lab Philosophy: Enterprise-Grade Purple Team Simulation
+
+This lab environment is designed to reflect realistic enterprise conditions, not simplified proof-of-concept scenarios.
+The architecture emulates multi-zone network segmentation, dual-firewall infrastructure, and cross-functional detection-response workflows.
+
+Unlike general-purpose testbeds or pentesting sandboxes, this lab focuses on:
+
+Adversary emulation across DMZ, internal, and restricted networks
+
+Detection engineering with full event visibility and timeline correlation
+
+SOAR-driven containment workflows including VLAN-based isolation
+
+Integration of threat intelligence for real-time enrichment and response logic
+
+Role-based assets with specific attack surfaces, functions, and trust levels
+
+LLM-assisted detection or decision support, tested in live IR conditions
+
+This is not a single-network, catch-all lab.
+Instead, PurpleForge simulates the challenges and workflows encountered in modern enterprise SOCs, including incident containment, policy enforcement, and cross-zone automation.
+
+To further align with realistic environments, future expansions will include Zero Trust architecture components, multi-factor authentication (MFA) integration, and additional layers of identity-aware access control.
+
+The goal is to build, test, and refine security processes, not just to demonstrate tool capabilities.
+
+---
 
 ## Overview (EN)
 
