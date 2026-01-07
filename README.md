@@ -34,6 +34,8 @@ To further align with realistic environments, future enhancements will include Z
 The goal is not merely to showcase tools, but to build, test, and refine security processes under realistic operational constraints.
 es.
 
+[Index File | Table of Contents](EN/README.md)
+
 ---
 ##  ラボの方針：エンタープライズレベルのパープルチームシミュレーション
 
@@ -55,32 +57,6 @@ es.
 さらに現実のセキュリティアーキテクチャに近づけるため、今後は **ゼロトラスト構成**、**多要素認証 (MFA)**、**アイデンティティベースのアクセス制御**なども追加予定です。
 
 このラボの目標は、単にツールを披露することではなく、**現実的なセキュリティプロセスを構築・検証・改善すること**にあります。
-
----
-
-## Overview (EN)
-
-**PurpleForge** is a central hub for:
-
-- Red team execution guides (realistic attack chains)  
-- Blue team detection and EQL examples  
-- Purple team integrations (how to see both sides)  
-- Lab setups and technical demos  
-- Linked content I reference in my LinkedIn posts  
-
-[Index File | Table of Contents](EN/README.md)
-
----
-
-## 概要（日本語）
-
-**PurpleForge** は以下を含む長期的なパープルチーミングリポジトリです：
-
-- Red Team の攻撃手法と実行手順  
-- Blue Team の検知方法と KQL クエリ  
-- 両者を統合する Purple チームの視点  
-- Active Directory ラボの構築と実演  
-- LinkedIn 投稿からも参照される実践リソース  
 
 [Index File | Table of Contents (日本語)](JP/README.md)
 
