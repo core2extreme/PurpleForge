@@ -18,7 +18,7 @@ This repository includes attack simulations, detection engineering, and hardenin
 **PurpleForge** is a central hub for:
 
 - Red team execution guides (realistic attack chains)  
-- Blue team detection and KQL examples  
+- Blue team detection and EQL examples  
 - Purple team integrations (how to see both sides)  
 - Lab setups and technical demos  
 - Linked content I reference in my LinkedIn posts  
