@@ -2,7 +2,19 @@
 
 The following diagram provides an overview of the PurpleForge lab environment, including segmentation, firewalls, and role-specific zones.
 
-![Lab Network Overview](./resources/netplan.drawio.png)
+![Lab Network Overview](./resources/netplan.drawio.png)  
+
+### ⚠️ Caution: Recommended Hypervisor for Windows Hosts
+
+> **Important:** When running this lab setup on a Windows host, it is strongly recommended to use **Microsoft Hyper-V** as the virtualization platform.  
+>  
+> This is due to **VLAN tagging limitations** in higher-level Type-2 hypervisors like **VMware Workstation** and **VirtualBox**, which do **not support native 802.1Q VLAN tagging** on virtual network adapters.  
+>  
+> Hyper-V provides **full VLAN support**, including **access and trunk modes**, making it essential for accurate zone-based network segmentation (e.g., DMZ, Quarantine, Blackhole) and **realistic enterprise-grade containment workflows**.
+>
+> While the usage of other hypervisors is technically possible, please note that this will **introduce significant limitations**, especially for **incident response or containment actions involving VLAN switching** on the internal firewall.  
+> Such actions may not be possible or would require complex workarounds with isolated virtual switches.
+
 
 ## Machine Overview
 
